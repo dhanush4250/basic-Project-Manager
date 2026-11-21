@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ AUTH SCREEN ============ -->
+  <div id="auth-screen" class="auth-screen">
+    <div class="auth-box">
+      <h1>📋 Project Manager</h1>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button id="tab-login" class="tab active">Login</button>
+        <button id="tab-signup" class="tab">Sign Up</button>
+      </div>
+
+      <!-- Login form -->
+      <form id="login-form" class="form">
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <p class="error" id="login-error"></p>
+      </form>
+
+      <!-- Signup form -->
+      <form id="signup-form" class="form hidden">
+        <input type="text" id="signup-name" placeholder="Full Name" required />
+        <input type="email" id="signup-email" placeholder="Email" required />
+        <input type="password" id="signup-password" placeholder="Password (min 6 chars)" required minlength="6" />
+        <button type="submit">Create Account</button>
+        <p class="error" id="signup-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ APP SCREEN (after login) ============ -->
+  <div id="app-screen" class="app-screen hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>📋 PM</h2>
+      <nav>
+        <button class="nav-btn active" data-view="dashboard">🏠 Dashboard</button>
+        <button class="nav-btn" data-view="tasks">✅ Tasks</button>
+        <button class="nav-btn" data-view="team">👥 Team</button>
+        <button class="nav-btn" data-view="analytics">📊 Analytics</button>
+        <button class="nav-btn" data-view="admin" id="nav-admin">⚙️ Admin</button>
+      </nav>
+      <div class="user-box">
+        <p id="current-user-name">—</p>
+        <span id="current-user-role" class="role-badge">—</span>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+      <!-- Dashboard view -->
+      <section id="view-dashboard" class="view">
+        <h1>Dashboard</h1>
+        <div class="cards">
+          <div class="card">
+            <h3>Total Tasks</h3>
+            <p id="stat-total-tasks" class="big-number">0</p>
+          </div>
+          <div class="card">
+            <h3>In Progress</h3>
+            <p id="stat-inprogress" class="big-number">0</p>
+          </div>
+          <div class="card">
+            <h3>Completed</h3>
+            <p id="stat-completed" class="big-number">0</p>
+          </div>
+          <div class="card">
+            <h3>Team Members</h3>
+            <p id="stat-members" class="big-number">0</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks view -->
+      <section id="view-tasks" class="view hidden">
+        <h1>Tasks</h1>
+        <form id="task-form" class="task-form">
+          <input type="text" id="task-title" placeholder="Task title" required />
+          <input type="text" id="task-desc" placeholder="Description (optional)" />
+          <select id="task-assignee">
+            <option value="">Unassigned</option>
+          </select>
+          <button type="submit">+ Add Task</button>
+        </form>
+        <div id="task-list" class="task-list"></div>
+      </section>
+
+      <!-- Team view -->
+      <section id="view-team" class="view hidden">
+        <h1>Team</h1>
+        <p class="hint">All users who signed up are listed here.</p>
+        <div id="team-list" class="team-list"></div>
+      </section>
+
+      <!-- Analytics view -->
+      <section id="view-analytics" class="view hidden">
+        <h1>Progress Analytics</h1>
+        <div class="progress-block">
+          <p>Completion Rate</p>
+          <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+          <p id="progress-label">0%</p>
+        </div>
+        <div id="analytics-breakdown" class="analytics-breakdown"></div>
+      </section>
+
+      <!-- Admin view (only visible to admins) -->
+      <section id="view-admin" class="view hidden">
+        <h1>Admin Dashboard</h1>
+        <p class="hint">Only visible to users with the "admin" role.</p>
+        <h3>All Users</h3>
+        <div id="admin-users" class="team-list"></div>
+        <h3>All Tasks</h3>
+        <div id="admin-tasks" class="task-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
